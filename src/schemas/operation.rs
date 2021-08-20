@@ -1,5 +1,8 @@
+use crate::schemas::{MoneyAmount, InstrumentType};
+use crate::schemas::currency::Currency;
+
 use serde::{Serialize, Deserialize};
-use crate::schema::{MoneyAmount, Currency, InstrumentType};
+
 
 /// # Тип операции
 /// Используется для выбора операции.
@@ -19,7 +22,7 @@ pub enum OperationType {
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
 /// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
-enum OperationTypeWithCommission {
+pub enum OperationTypeWithCommission {
     Buy,
     BuyCard,
     Sell,
@@ -48,7 +51,7 @@ enum OperationTypeWithCommission {
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
 /// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
-enum OperationStatus {
+pub enum OperationStatus {
     /// Выполнено.
     Done,
 
@@ -59,31 +62,15 @@ enum OperationStatus {
     Progress
 }
 
-/// # Структура ответа на запрос об операциях
-/// Используется для получения и хранения информации об операциях
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
-/// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(rename_all="camelCase")]
-struct OperationsResponse {
-    tracking_id:    str,
-
-    /// Статус.
-    status:         str,
-
-    /// Операции.
-    payload:        Operations
-}
 
 /// # Структура списка операций
 /// Используется для хранения массива операций.
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
 /// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
-struct Operations {
+pub struct Operations {
     /// Операции.
-    operations: [Operation]
+    pub operations: Vec<Operation>
 }
 
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
@@ -91,15 +78,15 @@ struct Operations {
 /// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
-struct OperationTrade {
-    trade_id:   str,
+pub struct OperationTrade {
+    pub trade_id:   String,
 
     /// Дата и время.
-    date:       str,
+    pub date:       String,
 
     /// Цена.
-    price:      f32,
-    quantity:   i32
+    pub price:      f32,
+    pub quantity:   i32
 }
 
 /// # Структура операции
@@ -109,35 +96,35 @@ struct OperationTrade {
 /// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
-struct Operation {
-    id:         str,
+pub struct Operation {
+    pub id:                 String,
 
     /// Статус.
-    status:             OperationStatus,
-    trades:             [OperationTrade],
+    pub status:             OperationStatus,
+    pub trades:             Vec<OperationTrade>,
 
     /// Комиссия.
-    commission:         MoneyAmount,
+    pub commission:         MoneyAmount,
 
     /// Валюта.
-    currency:           Currency,
-    payment:            f32,
+    pub currency:           Currency,
+    pub payment:            f32,
 
     /// Цена.
-    price:              f32,
-    quantity:           i32,
-    quantity_executed:  i32,
+    pub price:              f32,
+    pub quantity:           i32,
+    pub quantity_executed:  i32,
 
     /// Код инструмента.
-    figi: str,
+    pub figi:               String,
 
     /// Тип инструмента.
-    instrument_type:    InstrumentType,
-    is_margin_call:     bool,
+    pub instrument_type:    InstrumentType,
+    pub is_margin_call:     bool,
 
     /// Дата и время.
-    date: str,
+    pub date:               String,
 
     /// Тип операции.
-    operation_type: OperationTypeWithCommission
+    pub operation_type:     OperationTypeWithCommission
 }

@@ -26,7 +26,7 @@ pub enum Currency {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Currencies {
     /// Массив валютных позиций.
-    currencies: [CurrencyPosition]
+    pub currencies: Vec<CurrencyPosition>
 }
 
 
@@ -35,13 +35,13 @@ pub struct Currencies {
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
 /// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
-struct CurrencyPosition {
+pub struct CurrencyPosition {
     /// Валюта.
-    currency:   Currency,
+    pub currency:   Currency,
 
     /// Баланс.
-    balance:    f32,
+    pub balance:    f32,
 
-    /// Заблокировано средств.
-    blocked:    f32
+    #[serde(default)]
+    pub blocked:   f32
 }

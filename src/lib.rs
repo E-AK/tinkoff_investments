@@ -1,10 +1,14 @@
-mod schema;
-mod api;
+pub mod schemas;
+mod services;
 
-#[cfg(test)]
-mod tests {
-    #[test]
-    fn it_works() {
-        assert_eq!(2 + 2, 4);
-    }
+
+use hyper::Client;
+use hyper_tls::HttpsConnector;
+use hyper::client::HttpConnector;
+
+
+pub struct Service {
+    pub token: String,
+    pub broker_account_id: String,
+    http_client: Client<HttpsConnector<HttpConnector>>
 }

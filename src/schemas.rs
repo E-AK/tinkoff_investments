@@ -1,33 +1,31 @@
-use crate::schema::currency::Currency;
-use serde::{Serialize, Deserialize};
-
-mod portfolio;
 pub mod account;
 pub mod order;
-mod market;
-mod operation;
+pub mod market;
+pub mod operation;
 pub mod currency;
 pub mod error;
-mod candle;
+pub mod candle;
 pub mod sandbox;
-mod streaming;
+pub mod streaming;
+pub mod portfolio;
 
 
-/// # Безымянная структура
-/// Используется для получения и хранения неопределенных данных.
+use crate::schemas::currency::Currency;
+
+use serde::{Serialize, Deserialize};
+
+
+/// # Структура ответа на запрос
+/// Используется для получения и хранения информации о брокерских счетах.
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в стуктуру
 /// и отлаживаться
 /// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
-pub struct Empty<TPayload> {
-    tracking_id: str,
-
-    /// Какие-то данные.
-    payload: TPayload,
-
-    /// Статус.
-    status: str,
+pub struct Resp<TPayload> {
+    pub tracking_id:    String,
+    pub status:         String,
+    pub payload:        TPayload
 }
 
 
@@ -36,12 +34,12 @@ pub struct Empty<TPayload> {
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в стуктуру
 /// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
-struct MoneyAmount {
+pub struct MoneyAmount {
     /// Валюта.
-    currency: Currency,
+    pub currency: Currency,
 
     /// Значение.
-    value: f32,
+    pub value: f32,
 }
 
 
@@ -50,7 +48,7 @@ struct MoneyAmount {
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в стуктуру
 /// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
-enum TradeStatus {
+pub enum TradeStatus {
     /// Нормальная торговля.
     NormalTrading,
 

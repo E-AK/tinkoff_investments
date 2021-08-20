@@ -14,33 +14,14 @@ pub enum BrokerAccountType {
     TinkoffIis
 }
 
-
-/// # Структура ответа на запрос о брокерских счетах
-/// Используется для получения и хранения информации о брокерских счетах.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в стуктуру
-/// и отлаживаться
-/// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(rename_all="camelCase")]
-struct UserAccountsResponse {
-    tracking_id:    str,
-
-    /// Статус.
-    status:         str,
-
-    /// Брокерские счета.
-    payload:        UserAccounts
-}
-
-
 /// # Структура с массивом брокерских счетов
 /// Используется, как тип данных при получении данных.
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в структуру
 /// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
-struct UserAccounts {
+pub struct UserAccounts {
     /// Список брокерских счетов.
-    accounts: [UserAccount]
+    pub accounts: Vec<UserAccount>
 }
 
 
@@ -52,11 +33,11 @@ struct UserAccounts {
 /// * Есть алиас с именем `SandboxAccount`, т.к. есть структура `SandboxAccount` с такими же полями
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
-#[serde(alias="SandboxAccount")]
+// #[serde(alias="SandboxAccount")]
 pub struct UserAccount {
     /// Тип брокерского счета.
-    broker_account_type:    BrokerAccountType,
+    pub broker_account_type:    BrokerAccountType,
 
     /// Идентификатор (id) брокерского счета.
-    broker_account_id:      str
+    pub broker_account_id:      String
 }

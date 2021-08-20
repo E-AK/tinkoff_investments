@@ -9,65 +9,48 @@ use serde::{Serialize, Deserialize};
 #[derive(Serialize, Deserialize, Debug)]
 pub enum CandleResolution {
     /// `1min`
-    #[serde(name="1min")]
+    #[serde(rename="1min")]
     Min,
 
     /// `2min`
-    #[serde(name="2min")]
+    #[serde(rename="2min")]
     TwoMin,
 
     /// `3min`
-    #[serde(name="3min")]
+    #[serde(rename="3min")]
     ThreeMin,
 
     /// `5min`
-    #[serde(name="5min")]
+    #[serde(rename="5min")]
     FiveMin,
 
     /// `10min`
-    #[serde(name="10min")]
+    #[serde(rename="10min")]
     TenMin,
 
     /// `15min`
-    #[serde(name="15min")]
+    #[serde(rename="15min")]
     FifteenMin,
 
     /// `30min`
-    #[serde(name="30min")]
+    #[serde(rename="30min")]
     ThirtyMin,
 
     /// `hour`
-    #[serde(name="hour")]
+    #[serde(rename="hour")]
     Hour,
 
     /// `day`
-    #[serde(name="day")]
+    #[serde(rename="day")]
     Day,
 
     /// `week`
-    #[serde(name="week")]
+    #[serde(rename="week")]
     Week,
 
     /// `month`
-    #[serde(name="month")]
+    #[serde(rename="month")]
     Month
-}
-
-
-/// # Структура ответа на запрос свечей
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в стуктуру
-/// и отлаживаться
-/// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
-#[derive(Serialize, Deserialize, Debug)]
-#[serde(rename_all="camelCase")]
-struct CandlesResponse {
-    tracking_id:    str,
-
-    /// Статус.
-    status:         str,
-
-    /// Свечи.
-    payload:        Candles
 }
 
 
@@ -76,15 +59,15 @@ struct CandlesResponse {
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в стуктуру
 /// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
-struct Candles {
+pub struct Candles {
     /// Код инструмента.
-    figi:       str,
+    pub figi:       String,
 
     /// Интервал.
-    interval:   CandleResolution,
+    pub interval:   CandleResolution,
 
     /// Массив свечей.
-    candles:    [Candle]
+    pub candles:    Vec<Candle>
 }
 
 
@@ -95,26 +78,26 @@ struct Candles {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Candle {
     /// Код инструмента.
-    figi:       str,
+    pub figi:       String,
 
     /// Интервал.
-    interval:   CandleResolution,
+    pub interval:   CandleResolution,
 
     /// Цена открытия.
-    o:          f32,
+    pub o:          f32,
 
     /// Цена закрытия.
-    c:          f32,
+    pub c:          f32,
 
     /// Наивысшая цена.
-    h:          f32,
+    pub h:          f32,
 
     /// Наименьшая цена.
-    l:          f32,
+    pub l:          f32,
 
     /// Объем.
-    v:          f32,
+    pub v:          f32,
 
     /// Дата и время.
-    time:       str
+    pub time:      String
 }
