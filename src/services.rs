@@ -7,18 +7,20 @@ mod user;
 
 
 use crate::schemas::error::Error;
-use crate::Service;
+use crate::API;
+use crate::schemas::Resp;
 
 use std::collections::HashMap;
 use hyper::{Client, Method, Request, Body};
 use hyper_tls::HttpsConnector;
-use crate::schemas::Resp;
 use chrono::{DateTime, Utc, Datelike, Timelike};
+use tungstenite::connect;
+use url::Url;
 
 
 pub const BASE_URI: &str = "https://api-invest.tinkoff.ru/openapi/";
 pub const SANDBOX_URI: &str = "https://api-invest.tinkoff.ru/openapi/sandbox/";
-// pub const STREAMING_URI: &str = "wss://api-invest.tinkoff.ru/openapi/md/v1/md-openapi/ws";
+pub const STREAMING_URI: &str = "wss://api-invest.tinkoff.ru/openapi/md/v1/md-openapi/ws";
 
 pub const SANDBOX_REGISTER: &str = "register";
 pub const SANDBOX_CURRENCIES_BALANCE: &str = "currencies/balance";
@@ -46,16 +48,19 @@ pub const BY_TICKER: &str = "market/search/by-ticker";
 pub const OPERATIONS: &str = "operations";
 pub const USER: &str = "user/accounts";
 
-impl Service {
-    pub fn new(token: String) -> Service {
+impl API {
+    pub fn new(token: String) -> API {
         let https = HttpsConnector::new();
-        let client = Client::builder()
+        let http_client = Client::builder()
             .build::<_, hyper::Body>(https);
+        let (ws_client, _) =
+            connect(Url::parse(&STREAMING_URI).unwrap()).expect("Can't connect.");
 
-        Service {
+        API {
             token,
             broker_account_id: "".to_string(),
-            http_client : client
+            http_client,
+            ws_client
         }
     }
 

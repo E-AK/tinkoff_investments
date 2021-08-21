@@ -6,8 +6,6 @@ use serde::{Serialize, Deserialize};
 
 /// # Тип операции
 /// Используется для выбора операции.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub enum OperationType {
     /// Покупка.
@@ -19,8 +17,6 @@ pub enum OperationType {
 
 /// # Тип операций, включая комиссию
 /// Используется для указания операции.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub enum OperationTypeWithCommission {
     Buy,
@@ -48,8 +44,6 @@ pub enum OperationTypeWithCommission {
 
 /// # Статус операции
 /// Используется для указания статуса операции.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub enum OperationStatus {
     /// Выполнено.
@@ -65,17 +59,12 @@ pub enum OperationStatus {
 
 /// # Структура списка операций
 /// Используется для хранения массива операций.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Operations {
     /// Операции.
     pub operations: Vec<Operation>
 }
 
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
-/// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
 pub struct OperationTrade {
@@ -91,9 +80,6 @@ pub struct OperationTrade {
 
 /// # Структура операции
 /// Используется для хранения информации об операции.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
-/// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
 pub struct Operation {

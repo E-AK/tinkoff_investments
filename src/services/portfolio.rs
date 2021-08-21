@@ -1,4 +1,4 @@
-use crate::Service;
+use crate::API;
 use crate::services::{BASE_URI, PORTFOLIO, PORTFOLIO_CURRENCIES};
 
 use hyper::{Method, Body};
@@ -9,7 +9,7 @@ use crate::schemas::Resp;
 use crate::schemas::currency::Currencies;
 
 
-impl Service {
+impl API {
     /// # Получение портфеля
     pub async fn get_portfolio(&self) -> Result<Resp<Portfolio>, Resp<Error>> {
         let mut params = HashMap::new();

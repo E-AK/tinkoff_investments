@@ -1,4 +1,4 @@
-use crate::Service;
+use crate::API;
 use crate::services::{BASE_URI, STOCKS, BONDS, ETFS, CURRENCIES, ORDER_BOOK, CANDLES, BY_FIGI, BY_TICKER, dt_fmt};
 use crate::schemas::candle::{CandleResolution, Candles};
 
@@ -10,7 +10,7 @@ use crate::schemas::Resp;
 use crate::schemas::market::{MarketInstrumentList, MarketInstrument, OrderBook};
 
 
-impl Service {
+impl API {
     /// # Получение списка акций
     /// * `api` - Объект API
     pub async fn get_stocks(&self) -> Result<Resp<MarketInstrumentList>, Resp<Error>> {

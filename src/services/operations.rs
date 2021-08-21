@@ -1,4 +1,4 @@
-use crate::Service;
+use crate::API;
 use crate::schemas::error::Error;
 use crate::services::{BASE_URI, OPERATIONS, dt_fmt};
 
@@ -9,7 +9,7 @@ use crate::schemas::Resp;
 use crate::schemas::operation::Operations;
 
 
-impl Service {
+impl API {
     /// # Получение списка операций
     /// * `from` - Начало временного промежутка
     /// * `to` - Конец временного промежутка

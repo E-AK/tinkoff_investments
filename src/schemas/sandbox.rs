@@ -8,7 +8,6 @@ use serde::{Serialize, Deserialize};
 /// Используется для созтавления запроса регистрации песочницы.
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
 /// и отлаживаться
-/// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
 pub struct SandboxRegisterRequest {
@@ -18,8 +17,6 @@ pub struct SandboxRegisterRequest {
 
 /// # Структура запроса установки баланса в песочнице
 /// Используется для составления запроса установки баланса в песочнице.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SandboxSetCurrencyBalanceRequest {
     /// Валюта.
@@ -32,8 +29,6 @@ pub struct SandboxSetCurrencyBalanceRequest {
 
 /// # Структура запроса установки позиции в песочнице
 /// Используется для составления запроса установки позиции в песочнице.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SandboxSetPositionBalanceRequest {
     /// Код инструмента.

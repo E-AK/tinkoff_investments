@@ -6,8 +6,6 @@ use serde::{Serialize, Deserialize};
 
 /// # Статус заявки
 /// Используется для отображения статуса заявки.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub enum OrderStatus {
     /// Новая.
@@ -41,8 +39,6 @@ pub enum OrderStatus {
 
 /// # Тип заявки
 /// Используется для указания типа заявки.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub enum OrderType {
     /// Лимитная.
@@ -55,9 +51,6 @@ pub enum OrderType {
 
 /// # Структура заявки
 /// Используется хранения информации о заявке.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
-/// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
 pub struct Order {
@@ -84,8 +77,6 @@ pub struct Order {
 
 /// # Структура запроса лимитной заявки
 /// Используется для составления лимитной заяви.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub struct LimitOrderRequest {
     /// Количество лотов.
@@ -99,6 +90,8 @@ pub struct LimitOrderRequest {
 }
 
 
+/// # Структура ответа лимитной заявки
+/// Используется для получения и хранения лимитной заяви.
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
 pub struct PlacedLimitOrder {
@@ -114,6 +107,8 @@ pub struct PlacedLimitOrder {
 }
 
 
+/// # Структура запроса рыночной заявки
+/// Используется для составления рыночной заяви.
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MarketOrderRequest {
     pub lots:       u32,
@@ -121,6 +116,8 @@ pub struct MarketOrderRequest {
 }
 
 
+/// # Структура ответа лимитной заявки
+/// Используется для получения и хранения рыночной заяви.
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
 pub struct PlacedMarketOrder {

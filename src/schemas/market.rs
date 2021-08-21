@@ -6,8 +6,6 @@ use crate::schemas::order::Order;
 
 /// # Структура списка инструментов
 /// Используется для храниния массива инструментов.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MarketInstrumentList {
     pub total:          i32,
@@ -19,8 +17,6 @@ pub struct MarketInstrumentList {
 
 /// # Информация об инструменте
 /// Используется для хранения информации об инструменте.
-/// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
-/// * Есть алиас с именем `SearchMarketInstrument`, т.к. есть структура с такими же полями
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
 pub struct MarketInstrument {
@@ -54,9 +50,6 @@ pub struct MarketInstrument {
 
 /// Структура стакана.
 /// Используется для хранения стакана.
-/// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в перечисление
-/// и отлаживаться
-/// * Поля преобразуются в стиль `camelCase`, т.к. сервер отправляет названия в таком стиле
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
 pub struct OrderBook {

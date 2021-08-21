@@ -1,4 +1,4 @@
-use crate::Service;
+use crate::API;
 use crate::schemas::sandbox::{SandboxRegisterRequest, SandboxSetCurrencyBalanceRequest,
                               SandboxSetPositionBalanceRequest};
 use crate::services::{SANDBOX_URI, SANDBOX_REGISTER, SANDBOX_CURRENCIES_BALANCE,
@@ -11,7 +11,7 @@ use crate::schemas::error::Error;
 use crate::schemas::account::UserAccount;
 
 
-impl Service {
+impl API {
     /// # Регистрация клиента в sandbox
     /// * `req` - Структура запроса
     pub async fn reg(&self, req: SandboxRegisterRequest) -> Result<Resp<UserAccount>, Resp<Error>> {

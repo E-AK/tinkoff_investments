@@ -1,4 +1,4 @@
-use crate::Service;
+use crate::API;
 use crate::services::{BASE_URI, ORDERS, LIMIT_ORDER, MARKET_ORDER, CANCEL};
 use crate::schemas::order::{LimitOrderRequest, MarketOrderRequest, Order, PlacedLimitOrder, PlacedMarketOrder};
 
@@ -8,7 +8,7 @@ use crate::schemas::{Resp};
 use crate::schemas::error::Error;
 
 
-impl Service {
+impl API {
     /// # Получение списка активных заявок
     pub async fn get_orders(&self) -> Result<Resp<Vec<Order>>, Resp<Error>> {
         let mut params = HashMap::new();
