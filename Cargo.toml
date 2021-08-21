@@ -21,3 +21,7 @@ hyper-tls   = { version = "0.5" }
 chrono      = "0.4"
 tungstenite = "0.15.0"
 url         = "2.2.2"
+
+[lib]
+name = "lib"
+path = "src/lib.rs"
