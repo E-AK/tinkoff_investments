@@ -5,7 +5,6 @@ mod services;
 use hyper::Client;
 use hyper_tls::HttpsConnector;
 use hyper::client::HttpConnector;
-use std::net::TcpStream;
 
 
 /// # Основная структура библиотеки для одного аккаунта

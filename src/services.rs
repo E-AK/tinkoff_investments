@@ -14,13 +14,11 @@ use std::collections::HashMap;
 use hyper::{Client, Method, Request, Body};
 use hyper_tls::HttpsConnector;
 use chrono::{DateTime, Utc, Datelike, Timelike};
-use tungstenite::connect;
-use url::Url;
 
 
 pub const BASE_URI: &str = "https://api-invest.tinkoff.ru/openapi/";
 pub const SANDBOX_URI: &str = "https://api-invest.tinkoff.ru/openapi/sandbox/";
-pub const STREAMING_URI: &str = "wss://api-invest.tinkoff.ru/openapi/md/v1/md-openapi/ws";
+// pub const STREAMING_URI: &str = "wss://api-invest.tinkoff.ru/openapi/md/v1/md-openapi/ws";
 
 pub const SANDBOX_REGISTER: &str = "register";
 pub const SANDBOX_CURRENCIES_BALANCE: &str = "currencies/balance";
