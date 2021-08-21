@@ -53,14 +53,11 @@ impl API {
         let https = HttpsConnector::new();
         let http_client = Client::builder()
             .build::<_, hyper::Body>(https);
-        let (ws_client, _) =
-            connect(Url::parse(&STREAMING_URI).unwrap()).expect("Can't connect.");
 
         API {
             token,
             broker_account_id: "".to_string(),
             http_client,
-            ws_client
         }
     }
 
