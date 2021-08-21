@@ -2,9 +2,6 @@
 name        = "tinkoff_investments"
 description = "Библиотека с открытым исходным кодом для разработки торговых роботов на платформе \"Тинькофф инвестиции\". Основана на Тинькофф Инвестиции Open API."
 authors     = ["Egor Kuznetsov"]
-repository  = "https://github.com/E-AK/tinkoff_investments"
-keywords    = ["tinkoff", "open api", "api"]
-include     = ["LICENSE", "README.md"]
 license     = "LGPL-2.1"
 version     = "0.1.0"
 edition     = "2018"
@@ -21,7 +18,3 @@ hyper-tls   = { version = "0.5" }
 chrono      = "0.4"
 tungstenite = "0.15.0"
 url         = "2.2.2"
-
-[lib]
-name = "lib"
-path = "src/lib.rs"
