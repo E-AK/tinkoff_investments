@@ -15,6 +15,20 @@ use crate::schemas::currency::Currency;
 use serde::{Serialize, Deserialize};
 
 
+enum RequestTypes {
+    LimitOrderRequest(order::LimitOrderRequest),
+    MarketOrderRequest(order::MarketOrderRequest),
+    SandboxRegisterRequest(sandbox::SandboxRegisterRequest),
+    SandboxSetCurrencyBalanceRequest(sandbox::SandboxSetCurrencyBalanceRequest),
+    SandboxSetPositionBalanceRequest(sandbox::SandboxSetPositionBalanceRequest),
+}
+
+enum ResponseTypes {
+    Error(error::Error),
+    SandboxRegisterResponse(sandbox::SandboxRegisterResponse),
+    OrdersResponse(order::OrdersResponse)
+}
+
 /// # Структура ответа на запрос
 /// Используется для получения и хранения информации о брокерских счетах.
 /// * Может сериализоваться в JSON строку, десериализоваться из JSON строки в стуктуру
