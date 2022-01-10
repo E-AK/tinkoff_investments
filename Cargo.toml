@@ -19,5 +19,5 @@ hyper       = {version="0.14.9", features=["full"]}
 smallvec    = "1.6.1"
 hyper-tls   = { version = "0.5" }
 chrono      = "0.4"
-tungstenite = "0.15.0"
+websocket = "0.26.2"
 url         = "2.2.2"
