@@ -6,15 +6,12 @@ mod operations;
 mod user;
 
 
-use crate::schemas::error::Error;
 use crate::API;
-use crate::schemas::Resp;
 
 use std::collections::HashMap;
 use hyper::{Client, Method, Request, Body};
 use hyper_tls::HttpsConnector;
 use chrono::{DateTime, Utc, Datelike, Timelike};
-use tungstenite::connect;
 use url::Url;
 
 
@@ -53,14 +50,11 @@ impl API {
         let https = HttpsConnector::new();
         let http_client = Client::builder()
             .build::<_, hyper::Body>(https);
-        let (ws_client, _) =
-            connect(Url::parse(&STREAMING_URI).unwrap()).expect("Can't connect.");
 
         API {
             token,
             broker_account_id: "".to_string(),
             http_client,
-            ws_client
         }
     }
 
@@ -98,6 +92,16 @@ impl API {
         }
     }
 }
+
+
+pub trait Request {
+    fn query(&self, api: &API) -> crate::schemas::ResponseTypes;
+
+    fn get(&self, api: &API) -> crate::schemas::ResponseTypes;
+
+    fn post(&self, api: &API, req: crate::schemas::RequestTypes) -> crate::schemas::ResponseTypes;
+}
+
 
 pub fn dt_fmt(dt: DateTime<Utc>) -> String{
     format!("{}-{:02}-{:02}T{:02}%3A{:02}%3A{:02}%2B03%3A00",
