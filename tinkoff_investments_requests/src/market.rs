@@ -62,7 +62,7 @@ pub async fn candles(client: Box<super::Client>, params: Option<HashMap<String, 
 pub async fn by_figi(client: Box<super::Client>, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
     let req = client.req
         .method(Method::GET)
-        .uri(format!("{}{}{}", client.uri, "market/by-figi", params_str(params)))
+        .uri(format!("{}{}{}", client.uri, "search/by-ticker", params_str(params)))
         .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await
@@ -71,7 +71,7 @@ pub async fn by_figi(client: Box<super::Client>, params: Option<HashMap<String, 
 pub async fn by_ticker(client: Box<super::Client>, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
     let req = client.req
         .method(Method::GET)
-        .uri(format!("{}{}{}", client.uri, "market/by-ticker", params_str(params)))
+        .uri(format!("{}{}{}", client.uri, "search/by-ticker", params_str(params)))
         .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await

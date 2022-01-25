@@ -29,8 +29,6 @@ mod accounts {
 
 #[cfg(test)]
 mod market {
-    use std::collections::HashMap;
-
     use tinkoff_investments_requests::market;
 
     #[tokio::test]
@@ -76,70 +74,6 @@ mod market {
             Err(_) => panic!("Ошибка соединения")
         }
     }
-
-    #[tokio::test]
-    async fn orderbook() {
-        let client = Box::new(super::create_client());
-        let resp = market::orderbook(client, None).await;
-
-        match resp {
-            Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(500).unwrap()),
-            Err(_) => panic!("Ошибка соединения")
-        }
-    }
-
-    #[tokio::test]
-    async fn candles() {
-        let client = Box::new(super::create_client());
-        let resp = market::candles(client, None).await;
-
-        match resp {
-            Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(500).unwrap()),
-            Err(_) => panic!("Ошибка соединения")
-        }
-    }
-
-    #[tokio::test]
-    async fn by_figi() {
-        let client = Box::new(super::create_client());
-        let resp = market::by_figi(client, None).await;
-
-        match resp {
-            Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(500).unwrap()),
-            Err(_) => panic!("Ошибка соединения")
-        }
-    }
-
-    #[tokio::test]
-    async fn by_ticker() {
-        let mut params: HashMap<String, String> = HashMap::new();
-        params.insert(String::from("ticker"), String::from("SBER"));
-
-        let client = Box::new(super::create_client());
-        let resp = market::by_ticker(client, Some(params)).await;
-
-        match resp {
-            Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(200).unwrap()),
-            Err(_) => panic!("Ошибка соединения")
-        }
-    }
-}
-
-
-#[cfg(test)]
-mod operations{
-    use tinkoff_investments_requests::operations;
-
-    #[tokio::test]
-    async fn by_figi() {
-        let client = Box::new(super::create_client());
-        let resp = operations::operations(client, None).await;
-
-        match resp {
-            Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(500).unwrap()),
-            Err(_) => panic!("Ошибка соединения")
-        }
-    }
 }
 
 
@@ -181,17 +115,6 @@ mod sandbox {
     async fn currencies_balance() {
         let client = Box::new(super::create_client());
         let resp = sandbox::currencies_balance(client, String::from("{\"currency\": \"RUB\",\"balance\": 0}"), None).await;
-
-        match resp {
-            Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(200).unwrap()),
-            Err(_) => panic!("Ошибка соединения")
-        }
-    }
-
-    #[tokio::test]
-    async fn position_balance() {
-        let client = Box::new(super::create_client());
-        let resp = sandbox::position_balance(client, String::from("{\"figi\": \"string\",\"balance\": 0}"), None).await;
 
         match resp {
             Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(200).unwrap()),
