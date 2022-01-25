@@ -78,23 +78,6 @@ mod market {
 
 
 #[cfg(test)]
-mod orders{
-    use tinkoff_investments_requests::orders;
-
-    #[tokio::test]
-    async fn orders() {
-        let client = Box::new(super::create_client());
-        let resp = orders::orders(client, None).await;
-
-        match resp {
-            Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(200).unwrap()),
-            Err(_) => panic!("Ошибка соединения")
-        }
-    }
-}
-
-
-#[cfg(test)]
 mod sandbox {
     use core::panic;
     use tinkoff_investments_requests::sandbox;
@@ -110,33 +93,10 @@ mod sandbox {
         }
     }
 
-
-    #[tokio::test]
-    async fn currencies_balance() {
-        let client = Box::new(super::create_client());
-        let resp = sandbox::currencies_balance(client, String::from("{\"currency\": \"RUB\",\"balance\": 0}"), None).await;
-
-        match resp {
-            Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(200).unwrap()),
-            Err(_) => panic!("Ошибка соединения")
-        }
-    }
-
     #[tokio::test]
     async fn remove() {
         let client = Box::new(super::create_client());
         let resp = sandbox::remove(client, None).await;
-
-        match resp {
-            Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(200).unwrap()),
-            Err(_) => panic!("Ошибка соединения")
-        }
-    }
-
-    #[tokio::test]
-    async fn clear() {
-        let client = Box::new(super::create_client());
-        let resp = sandbox::clear(client, None).await;
 
         match resp {
             Ok(ok) => assert_eq!(ok.status(), hyper::StatusCode::from_u16(200).unwrap()),
