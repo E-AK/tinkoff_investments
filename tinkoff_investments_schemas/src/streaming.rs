@@ -1,3 +1,6 @@
+use serde::{Serialize, Deserialize};
+
+
 #[derive(Serialize, Deserialize, Debug)]
 pub enum Type {
     Candle,
@@ -15,14 +18,14 @@ pub enum Event {
 pub struct CandleReq {
     pub event: Event,
     pub figi: String,
-    pub interval: CandleResolution,
+    pub interval: super::candle::CandleResolution,
 }
 
 #[derive(Serialize, Deserialize, Debug)]
 pub struct CandleResp {
     pub event: String,
     pub time: String,
-    pub payload: Candle,
+    pub payload: super::candle::Candle,
 }
 
 
@@ -30,7 +33,7 @@ pub struct CandleResp {
 pub struct OrderBookReq {
     pub event: String,
     pub time: String,
-    pub payload: Order,
+    pub payload: super::order::Order,
 }
 
 #[derive(Serialize, Deserialize, Debug)]

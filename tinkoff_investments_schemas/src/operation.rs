@@ -1,3 +1,6 @@
+use serde::{Serialize, Deserialize};
+
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Operations {
     /// Операции.
@@ -18,7 +21,7 @@ pub struct Operation {
     pub commission:             super::MoneyAmount,
 
     /// Валюта.
-    pub currency:               super::Currency,
+    pub currency:               super::currency::Currency,
     pub payment:                f32,
 
     /// Цена.

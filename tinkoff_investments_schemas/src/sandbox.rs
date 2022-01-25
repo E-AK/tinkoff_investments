@@ -1,3 +1,6 @@
+use serde::{Serialize, Deserialize};
+
+
 #[derive(Serialize, Deserialize, Debug)]
 #[serde(rename_all="camelCase")]
 pub struct SandboxRegisterRequest {
@@ -8,7 +11,7 @@ pub struct SandboxRegisterRequest {
 #[derive(Serialize, Deserialize, Debug)]
 pub struct SandboxSetCurrencyBalanceRequest {
     /// Валюта.
-    pub currency:               super::Currency,
+    pub currency:               super::currency::Currency,
 
     /// Баланс.
     pub balance:                f32
@@ -24,7 +27,9 @@ pub struct SandboxSetPositionBalanceRequest {
     pub balance:                f32
 }
 
+#[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all="camelCase")]
 pub struct SandboxAccount {
-    brokerAccountType:          super::BrokerAccountType,
-    brokerAccountId:            String
+    broker_account_type:          super::BrokerAccountType,
+    broker_account_id:            String
 }

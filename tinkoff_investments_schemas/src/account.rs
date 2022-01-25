@@ -1,7 +1,10 @@
+use serde::{Serialize, Deserialize};
+
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct UserAccounts {
     /// Список брокерских счетов.
-    pub accounts:               Vec<UserAccount>
+    pub accounts:               Vec<UserAccounts>
 }
 
 

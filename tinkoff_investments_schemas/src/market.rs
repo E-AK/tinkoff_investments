@@ -1,3 +1,6 @@
+use serde::{Serialize, Deserialize};
+
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct MarketInstrumentList {
     pub total:                  i32,
@@ -15,11 +18,11 @@ pub struct OrderBook {
 
     /// Глубина.
     pub depth:                  i32,
-    pub bids:                   Vec<OrderResponse>,
-    pub asks:                   Vec<OrderResponse>,
+    pub bids:                   Vec<super::ResponseTypes>,
+    pub asks:                   Vec<super::ResponseTypes>,
 
     /// Статус торгов.
-    pub trade_status:           super::TradeStatus,
+    pub trade_status:           TradeStatus,
     pub min_price_increment:    f32,
 
     #[serde(default)]
@@ -32,13 +35,14 @@ pub struct OrderBook {
 
 
 #[derive(Serialize, Deserialize, Debug)]
+#[serde(rename_all="camelCase")]
 pub struct SearchMarketInstrument {
     pub figi:                   String,
     pub ticker:                 String,
     pub isin:                   String,
-    pub minPriceIncrement:      f32,
+    pub min_price_increment:      f32,
     pub lot:                    i32,
-    pub currency:               super::Currency,
+    pub currency:               super::currency::Currency,
     pub name:                   String,
     pub r#type:                 super::InstrumentType,
 }
@@ -69,7 +73,7 @@ pub struct MarketInstrument {
     pub min_quantity:           u32,
 
     /// Валюта.
-    pub currency:               super::Currency,
+    pub currency:               super::currency::Currency,
 
     /// Название бумаги.
     pub name:                   String,

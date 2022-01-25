@@ -1,3 +1,6 @@
+use serde::{Serialize, Deserialize};
+
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct Portfolio {
     /// Массив позиций в порфеле.

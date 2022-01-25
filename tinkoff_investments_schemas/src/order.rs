@@ -1,22 +1,16 @@
+use serde::{Serialize, Deserialize};
+
+
 #[derive(Serialize, Deserialize, Debug)]
 pub struct LimitOrderRequest {
     /// Количество лотов.
     pub lots:                   u32,
 
     /// Тип операции.
-    pub operation:              super::OperationType,
+    pub operation:              OperationType,
 
     /// Цена.
     pub price:                  f32
-}
-
-
-#[derive(Serialize, Deserialize, Debug)]
-pub struct Order {
-    pub depth:                  u8,
-    pub bids:                   Vec<f32>,
-    pub asks:                   Vec<f32>,
-    pub figi:                   String,
 }
 
 
@@ -86,7 +80,7 @@ pub struct Order {
     pub executed_lots:  u32,
 
     /// Тип заявки.
-    pub r#type:         super::OrderType,
+    pub r#type:         OrderType,
 
     /// Цена.
     pub price:          f32
