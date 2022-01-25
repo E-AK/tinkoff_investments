@@ -9,6 +9,8 @@ pub async fn operations(client: &super::Client, params: Option<HashMap<String, S
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}{}", super::OPERATIONS, params_str(params)))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 

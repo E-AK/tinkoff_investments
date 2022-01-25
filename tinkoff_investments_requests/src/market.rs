@@ -9,6 +9,8 @@ pub async fn stocks(client: &super::Client) -> Result<Response<Body>, Error> {
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}", super::STOCKS))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 
@@ -19,6 +21,8 @@ pub async fn bonds(client: &super::Client) -> Result<Response<Body>, Error> {
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}", super::BONDS))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 
@@ -29,6 +33,8 @@ pub async fn etfs(client: &super::Client) -> Result<Response<Body>, Error> {
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}", super::ETFS))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 
@@ -39,6 +45,8 @@ pub async fn currencies(client: &super::Client) -> Result<Response<Body>, Error>
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}", super::CURRENCIES))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 
@@ -49,6 +57,8 @@ pub async fn orderbook(client: &super::Client, params: Option<HashMap<String, St
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}{}", super::ORDERS, params_str(params)))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 
@@ -59,6 +69,8 @@ pub async fn candles(client: &super::Client, params: Option<HashMap<String, Stri
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}{}", super::CANDLES, params_str(params)))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 
@@ -69,6 +81,8 @@ pub async fn by_figi(client: &super::Client, params: Option<HashMap<String, Stri
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}{}", super::BY_FIGI, params_str(params)))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 
@@ -79,6 +93,8 @@ pub async fn by_ticker(client: &super::Client, params: Option<HashMap<String, St
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}{}", super::BY_TICKER, params_str(params)))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 

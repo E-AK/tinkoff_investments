@@ -9,6 +9,8 @@ pub async fn orders(client: &super::Client, params: Option<HashMap<String, Strin
     let req = Request::builder()
             .method(Method::GET)
             .uri(format!("{}{}", super::ORDERS, params_str(params)))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 
@@ -19,6 +21,8 @@ pub async fn limit_order(client: &super::Client, req_body: String, params: Optio
     let req = Request::builder()
             .method(Method::POST)
             .uri(format!("{}{}", super::LIMIT_ORDER, params_str(params)))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::from(req_body)).unwrap();
 
@@ -29,6 +33,8 @@ pub async fn market_order(client: &super::Client, req_body: String, params: Opti
     let req = Request::builder()
             .method(Method::POST)
             .uri(format!("{}{}", super::MARKET_ORDER, params_str(params)))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::from(req_body)).unwrap();
 
@@ -39,6 +45,8 @@ pub async fn cancel(client: &super::Client, params: Option<HashMap<String, Strin
     let req = Request::builder()
             .method(Method::POST)
             .uri(format!("{}{}", super::CANCEL, params_str(params)))
+            .header("accept", (String::from("application/json")).as_str())
+            .header("Content-Type", (String::from("application/json")).as_str())
             .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
             .body(Body::empty()).unwrap();
 
