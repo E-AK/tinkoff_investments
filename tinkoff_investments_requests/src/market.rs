@@ -1,102 +1,78 @@
 use std::collections::HashMap;
 
-use hyper::{Request, Method, Body, Response, Error};
+use hyper::{Method, Body, Response, Error};
 
 use super::params_str;
 
 
-pub async fn stocks(client: &super::Client) -> Result<Response<Body>, Error> {
-    let req = Request::builder()
-            .method(Method::GET)
-            .uri(format!("{}", super::STOCKS))
-            .header("accept", (String::from("application/json")).as_str())
-            .header("Content-Type", (String::from("application/json")).as_str())
-            .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
-            .body(Body::empty()).unwrap();
+pub async fn stocks(client: Box<super::Client>) -> Result<Response<Body>, Error> {
+    let req = client.req
+        .method(Method::GET)
+        .uri(format!("{}{}", client.uri, "market/stocks"))
+        .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await
 }
 
-pub async fn bonds(client: &super::Client) -> Result<Response<Body>, Error> {
-    let req = Request::builder()
-            .method(Method::GET)
-            .uri(format!("{}", super::BONDS))
-            .header("accept", (String::from("application/json")).as_str())
-            .header("Content-Type", (String::from("application/json")).as_str())
-            .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
-            .body(Body::empty()).unwrap();
+pub async fn bonds(client: Box<super::Client>) -> Result<Response<Body>, Error> {
+    let req = client.req
+        .method(Method::GET)
+        .uri(format!("{}{}", client.uri, "market/bonds"))
+        .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await
 }
 
-pub async fn etfs(client: &super::Client) -> Result<Response<Body>, Error> {
-    let req = Request::builder()
-            .method(Method::GET)
-            .uri(format!("{}", super::ETFS))
-            .header("accept", (String::from("application/json")).as_str())
-            .header("Content-Type", (String::from("application/json")).as_str())
-            .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
-            .body(Body::empty()).unwrap();
+pub async fn etfs(client: Box<super::Client>) -> Result<Response<Body>, Error> {
+    let req = client.req
+        .method(Method::GET)
+        .uri(format!("{}{}", client.uri, "market/etfs"))
+        .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await
 }
 
-pub async fn currencies(client: &super::Client) -> Result<Response<Body>, Error> {
-    let req = Request::builder()
-            .method(Method::GET)
-            .uri(format!("{}", super::CURRENCIES))
-            .header("accept", (String::from("application/json")).as_str())
-            .header("Content-Type", (String::from("application/json")).as_str())
-            .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
-            .body(Body::empty()).unwrap();
+pub async fn currencies(client: Box<super::Client>) -> Result<Response<Body>, Error> {
+    let req = client.req
+        .method(Method::GET)
+        .uri(format!("{}{}", client.uri, "market/currencies"))
+        .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await
 }
 
-pub async fn orderbook(client: &super::Client, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
-    let req = Request::builder()
-            .method(Method::GET)
-            .uri(format!("{}{}", super::ORDERS, params_str(params)))
-            .header("accept", (String::from("application/json")).as_str())
-            .header("Content-Type", (String::from("application/json")).as_str())
-            .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
-            .body(Body::empty()).unwrap();
+pub async fn orderbook(client: Box<super::Client>, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
+    let req = client.req
+        .method(Method::GET)
+        .uri(format!("{}{}{}", client.uri, "market/orderbook", params_str(params)))
+        .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await
 }
 
-pub async fn candles(client: &super::Client, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
-    let req = Request::builder()
-            .method(Method::GET)
-            .uri(format!("{}{}", super::CANDLES, params_str(params)))
-            .header("accept", (String::from("application/json")).as_str())
-            .header("Content-Type", (String::from("application/json")).as_str())
-            .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
-            .body(Body::empty()).unwrap();
+pub async fn candles(client: Box<super::Client>, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
+    let req = client.req
+        .method(Method::GET)
+        .uri(format!("{}{}{}", client.uri, "market/candles", params_str(params)))
+        .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await
 }
 
-pub async fn by_figi(client: &super::Client, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
-    let req = Request::builder()
-            .method(Method::GET)
-            .uri(format!("{}{}", super::BY_FIGI, params_str(params)))
-            .header("accept", (String::from("application/json")).as_str())
-            .header("Content-Type", (String::from("application/json")).as_str())
-            .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
-            .body(Body::empty()).unwrap();
+pub async fn by_figi(client: Box<super::Client>, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
+    let req = client.req
+        .method(Method::GET)
+        .uri(format!("{}{}{}", client.uri, "market/by-figi", params_str(params)))
+        .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await
 }
 
-pub async fn by_ticker(client: &super::Client, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
-    let req = Request::builder()
-            .method(Method::GET)
-            .uri(format!("{}{}", super::BY_TICKER, params_str(params)))
-            .header("accept", (String::from("application/json")).as_str())
-            .header("Content-Type", (String::from("application/json")).as_str())
-            .header("Authorization", (String::from("Bearer ") + &client.token).as_str())
-            .body(Body::empty()).unwrap();
+pub async fn by_ticker(client: Box<super::Client>, params: Option<HashMap<String, String>>) -> Result<Response<Body>, Error> {
+    let req = client.req
+        .method(Method::GET)
+        .uri(format!("{}{}{}", client.uri, "market/by-ticker", params_str(params)))
+        .body(Body::empty()).unwrap();
 
     client.hyper_client.request(req).await
 }

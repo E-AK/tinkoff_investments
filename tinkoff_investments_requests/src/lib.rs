@@ -8,43 +8,38 @@ pub mod sandbox;
 use std::collections::HashMap;
 
 use chrono::{DateTime, Datelike, Timelike, Utc};
-use hyper;
+use hyper::{self, Request, http::request::Builder};
 use hyper_tls::HttpsConnector;
 use hyper::client::HttpConnector;
 
 
-pub const STREAMING_URI: &str = "wss://api-invest.tinkoff.ru/openapi/md/v1/md-openapi/ws";
-
-pub const SANDBOX_REGISTER: &str = "https://api-invest.tinkoff.ru/openapi/sandbox/register";
-pub const SANDBOX_CURRENCIES_BALANCE: &str = "https://api-invest.tinkoff.ru/openapi/sandbox/currencies/balance";
-pub const SANDBOX_POSITIONS_BALANCE: &str = "https://api-invest.tinkoff.ru/openapi/sandbox/positions/balance";
-pub const SANDBOX_REMOVE: &str = "https://api-invest.tinkoff.ru/openapi/sandbox/remove";
-pub const SANDBOX_CLEAR: &str = "https://api-invest.tinkoff.ru/openapi/sandbox/clear";
-
-pub const ORDERS: &str = "https://api-invest.tinkoff.ru/openapi/orders";
-pub const LIMIT_ORDER: &str = "https://api-invest.tinkoff.ru/openapi/orders/limit-order";
-pub const MARKET_ORDER: &str = "https://api-invest.tinkoff.ru/openapi/orders/market-order";
-pub const CANCEL: &str = "https://api-invest.tinkoff.ru/openapi/orders/cancel";
-
-pub const PORTFOLIO: &str = "https://api-invest.tinkoff.ru/openapi/portfolio";
-pub const PORTFOLIO_CURRENCIES: &str = "https://api-invest.tinkoff.ru/openapi/portfolio/currencies";
-
-pub const STOCKS: &str = "https://api-invest.tinkoff.ru/openapi/market/stocks";
-pub const BONDS: &str = "https://api-invest.tinkoff.ru/openapi/market/bonds";
-pub const ETFS: &str = "https://api-invest.tinkoff.ru/openapi/market/etfs";
-pub const CURRENCIES: &str = "https://api-invest.tinkoff.ru/openapi/market/currencies";
-pub const ORDER_BOOK: &str = "https://api-invest.tinkoff.ru/openapi/market/orderbook";
-pub const CANDLES: &str = "https://api-invest.tinkoff.ru/openapi/market/candles";
-pub const BY_FIGI: &str = "https://api-invest.tinkoff.ru/openapi/market/search/by-figi";
-pub const BY_TICKER: &str = "https://api-invest.tinkoff.ru/openapi/market/search/by-ticker";
-
-pub const OPERATIONS: &str = "https://api-invest.tinkoff.ru/openapi/operations";
-pub const ACCOUNTS: &str = "https://api-invest.tinkoff.ru/openapi/user/accounts";
+pub const BASE_URI: &str = "https://api-invest.tinkoff.ru/openapi/";
+pub const SANDBOX_URI: &str = "https://api-invest.tinkoff.ru/openapi/sandbox/";
 
 
 pub struct Client {
-    pub token: String,
+    pub uri: String,
+    pub req: Builder,
     pub hyper_client: hyper::Client<HttpsConnector<HttpConnector>>
+}
+
+impl Client {
+    pub fn new(token: String, uri: &str) -> Client {
+        let https = HttpsConnector::new();
+        let hyper_client = hyper::Client::builder()
+            .build::<_, hyper::Body>(https);
+
+        let req = Request::builder()
+            .header("accept", "application/json")
+            .header("Content-Type", "application/json")
+            .header("Authorization", &(String::from("Bearer ") + &token));
+
+        Client {
+            uri: String::from(uri),
+            req,
+            hyper_client
+        }
+    }
 }
 
 
