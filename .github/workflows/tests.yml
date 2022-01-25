@@ -16,8 +16,8 @@ jobs:
 
     steps:
     - uses: actions/checkout@v2
-    - name: Test
-      run: cargo test
+    - name: Test requests
+      run: cargo test --package tinkoff_investments_requests
       env:
         TINKOFF_SANDBOX_TOKEN: ${{ secrets.TINKOFF_SANDBOX_TOKEN }}
 
